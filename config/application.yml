@@ -1,0 +1,29 @@
+defaults: &defaults
+  twitter:
+    account: ""
+    tokens:
+      im_in: "#imin"
+      im_out: "#imout"
+  activities: []
+
+development:
+  <<: *defaults
+  twitter:
+    account: "Eactivitiestest"
+  activities:
+    -
+      name: "Football game"
+      code: "FTB"
+      when: "Sunday 12:00"
+      where: "Blah"
+    -
+      name: "Drinkup"
+      code: "DRN"
+      when: "Friday 20:00"
+      where: "Blah"
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

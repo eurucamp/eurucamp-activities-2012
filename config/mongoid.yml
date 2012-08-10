@@ -1,0 +1,28 @@
+development:
+  sessions:
+    default:
+      database: eurucamp_activities
+      hosts:
+        - localhost:27017
+
+development:
+  sessions:
+    default:
+      database: eurucamp_activities_test
+      hosts:
+        - localhost:27017
+
+production:
+  sessions:
+    default:
+      hosts:
+        - - <hostname>.member0.mongohq.com
+          - <port_number>
+        - - <hostname>.member1.mongohq.com
+          - <port_number>
+      username: <username>
+      password: <password>
+      database: <database>
+      options:
+        skip_version_check: true
+        safe: true
