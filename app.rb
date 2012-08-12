@@ -79,7 +79,7 @@ module Eurucamp
       end
 
       get "/" do
-        Job.new.run! # TODO temporary, it should be moved to backogrund worker
+        Job.new.run! if settings.environment == :development
         haml :index, :locals => { :activities =>  Repository.all}
       end
     end
