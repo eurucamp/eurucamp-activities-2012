@@ -21,7 +21,7 @@ If you haven't changed anything:
 
 ### Activities
 
-Activities can be configured it in `config/application.yml`. The format is:
+Activities can be configured in `config/application.yml`. The format is:
 
 ```YAML
 activities:
