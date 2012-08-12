@@ -1,11 +1,17 @@
+defaults: &defaults
+  options:
+    raise_not_found_error: false
+
 development:
+  <<: *defaults
   sessions:
     default:
       database: eurucamp_activities
       hosts:
         - localhost:27017
 
-development:
+test:
+  <<: *defaults
   sessions:
     default:
       database: eurucamp_activities_test
@@ -13,6 +19,7 @@ development:
         - localhost:27017
 
 production:
+  <<: *defaults
   sessions:
     default:
       hosts:
