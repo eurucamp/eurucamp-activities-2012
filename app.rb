@@ -59,8 +59,6 @@ module Eurucamp
         query = "to:#{Settings.twitter.account} '#{Settings.twitter.tokens.im_in} OR #{Settings.twitter.tokens.im_out}'"
         Twitter.search(query, :rpp => 100, :result_type => "recent").results.sort{ |x, y| x.created_at <=> y.created_at }.map do |status|
           args = {:code => status.code, :account => status.from_user}
-          # TODO it can be optimized a bit
-          # TODO review TODO.md
           if status.in?
             Participation.create(args)
           elsif status.out?
