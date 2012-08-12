@@ -1,14 +1,5 @@
 defaults: &defaults
   twitter:
-    account: ""
-    tokens:
-      im_in: "#imin"
-      im_out: "#imout"
-  activities: []
-
-development:
-  <<: *defaults
-  twitter:
     account: "Eactivitiestest"
     tokens:
       im_in: "#imin"
@@ -24,6 +15,10 @@ development:
       code: "DRN"
       when: 2012-08-18 20:00:00 +0100
       where: "Blah"
+
+development:
+  <<: *defaults
+
 
 test:
   <<: *defaults
