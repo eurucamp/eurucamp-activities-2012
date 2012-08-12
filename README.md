@@ -15,8 +15,8 @@ Next two steps are not mandatory.
 
 If you haven't changed anything:
 
-* fake Eurucamp Twitter account is (@Eactivitiestest)[https://twitter.com/Eactivitiestest]
-* you can debug stuff using this (page)[https://twitter.com/#!/search/realtime/%23imin%20OR%20%23imout%20to%3Aeactivitiestest]
+* fake Eurucamp Twitter account is [@Eactivitiestest](https://twitter.com/Eactivitiestest)
+* you can debug stuff using this [page](https://twitter.com/#!/search/realtime/%23imin%20OR%20%23imout%20to%3Aeactivitiestest)
 * message format is `<ACCOUNT> <TOKEN> <EVENT/ACTIVITY CODE>`, for example: `@Eactivitiestest #imin DKN` means: `i'm participating in drinkup`
 
 ### Activities
