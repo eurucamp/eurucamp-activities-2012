@@ -1,6 +1,7 @@
 defaults: &defaults
   options:
     raise_not_found_error: false
+    skip_version_check: true
 
 development:
   <<: *defaults
@@ -24,5 +25,4 @@ production:
     default:
       uri: <%= ENV['MONGOHQ_URL'] %>
       options:
-        skip_version_check: true
-        safe: true
+        safe: false # no idea why i can't set it to true
