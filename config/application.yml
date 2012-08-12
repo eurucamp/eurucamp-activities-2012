@@ -10,6 +10,9 @@ development:
   <<: *defaults
   twitter:
     account: "Eactivitiestest"
+    tokens:
+      im_in: "#imin"
+      im_out: "#imout"
   activities:
     -
       name: "Football game"
