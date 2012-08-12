@@ -6,6 +6,8 @@ Configuration
 
 ### Basic setup
 
+* install ruby 1.9.3 (mongoid ...)
+* `gem install bundler --pre`
 * configure MongoDB in `config/mongoid.yml`
 
 Next two steps are not mandatory.
