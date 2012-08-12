@@ -21,5 +21,21 @@ test:
 production:
   <<: *defaults
   sessions:
+    uri: <%= ENV['MONGOHQ_URL'] %>
+    options:
+      skip_version_check: true
+      safe: true
+
+  sessions:
     default:
-      uri: <%= ENV['MONGOHQ_URL'] %>
+      hosts:
+        - - <hostname>.member0.mongohq.com
+          - <port_number>
+        - - <hostname>.member1.mongohq.com
+          - <port_number>
+      username: <username>
+      password: <password>
+      database: <database>
+      options:
+        skip_version_check: true
+        safe: true
