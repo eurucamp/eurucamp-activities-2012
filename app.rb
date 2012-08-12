@@ -75,7 +75,6 @@ module Eurucamp
         enable :logging
 
         Mongoid.load!("./config/mongoid.yml")
-        #Participation.create_indexes # TODO this should be in Rake task
       end
 
       get "/" do
