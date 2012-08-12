@@ -75,6 +75,7 @@ module Eurucamp
         enable :logging
 
         Mongoid.load!("./config/mongoid.yml")
+        Participation.create_indexes
       end
 
       get "/" do
