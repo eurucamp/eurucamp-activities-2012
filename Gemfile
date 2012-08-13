@@ -28,7 +28,7 @@ end
 gem "jquery-rails"
 
 group :development do
-  gem "heroku",      "~> 2.28.7", :require => false
+  gem "heroku",      :require => false
 end
 
 group :development, :test do
