@@ -3,9 +3,12 @@ class Participation
   include Mongoid::Timestamps
   include ActiveModel::Validations
 
-  field :code
+  embedded_in :activity
+
   field :account
 
-  index({ :code => 1, :account => 1 }, { :unique => true, :drop_dups => true })
-  validates :code, :inclusion => { :in => Repository.codes, :allow_blank => false }
+  validates :account,  :presence => true, :allow_blank => false
+
+  # index({ :account => 1 }, { :unique => true, :drop_dups => true })
+  # moved to parent document
 end
