@@ -10,17 +10,14 @@ development:
       database: eurucamp_activities
       hosts:
         - localhost:27017
-      options:
-        consistency: :strong
 
 test:
+  <<: *defaults
   sessions:
     default:
       database: eurucamp_activities_test
       hosts:
         - localhost:27017
-      options:
-        consistency: :strong
 
 production:
   <<: *defaults
@@ -28,5 +25,4 @@ production:
     default:
       uri: <%= ENV['MONGOHQ_URL'] %>
       options:
-        consistency: :strong
-        # safe: false # no idea why i can't set it to true
+        safe: false # no idea why i can't set it to true
