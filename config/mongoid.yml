@@ -1,0 +1,32 @@
+defaults: &defaults
+  options:
+    raise_not_found_error: false
+    skip_version_check: true
+
+development:
+  <<: *defaults
+  sessions:
+    default:
+      database: eurucamp_activities
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+
+test:
+  sessions:
+    default:
+      database: eurucamp_activities_test
+      hosts:
+        - localhost:27017
+      options:
+        consistency: :strong
+
+production:
+  <<: *defaults
+  sessions:
+    default:
+      uri: <%= ENV['MONGOHQ_URL'] %>
+      options:
+        consistency: :strong
+        # safe: false # no idea why i can't set it to true
