@@ -160,6 +160,7 @@ DEPENDENCIES
   rack-test (~> 0.6.1)
   rails (= 3.2.8)
   rspec (~> 2.10.0)
+  sass (~> 3.2.0)
   sass-rails (~> 3.2.3)
   settingslogic (~> 2.0.8)
   twitter (~> 3.5.0)
