@@ -20,6 +20,8 @@ class Activity
   index({ "participations.account" => 1 }, { :unique => true, :drop_dups => true })
 
   accepts_nested_attributes_for :participations
+
+  scope :published, where(:published => true)
 end
 
 
