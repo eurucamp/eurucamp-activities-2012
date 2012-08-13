@@ -3,12 +3,12 @@ class Participation
   include Mongoid::Timestamps
   include ActiveModel::Validations
 
-  embedded_in :activity
+  belongs_to :activity
 
   field :account
 
-  validates :account,  :presence => true, :allow_blank => false
+  validates :account, :presence => true, :allow_blank => false, :uniqueness => {:scope => [:account, :activity_id]}
 
-  # index({ :account => 1 }, { :unique => true, :drop_dups => true })
-  # moved to parent document
+  index({:account => 1, :activity_id => 1}, {:unique => true, :drop_dups => true})
+
 end

@@ -9,6 +9,7 @@ Configuration
 * install ruby 1.9.3 (mongoid ...)
 * `gem install bundler --pre`
 * configure MongoDB in `config/mongoid.yml`
+* run `bundle exec rake db:mongoid:create_indexes`
 * run `bundle exec rake db:seed` (this will create fake admin account)
 
 Next two steps are not mandatory.
