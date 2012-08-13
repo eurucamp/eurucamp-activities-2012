@@ -8,5 +8,5 @@
 
 raise "You are bad boy" if Rails.env.production?
 
-p User.create! :name => 'Admin', :email => 'info+activities@eurucamp.org', :password => 'dontruninproduction', :password_confirmation => 'dontruninproduction'
+p User.create! :name => 'Admin', :email => 'info+activities@fake.com', :password => 'dontruninproduction', :password_confirmation => 'dontruninproduction'
 
