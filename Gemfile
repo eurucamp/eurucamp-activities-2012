@@ -35,3 +35,7 @@ group :development, :test do
   gem "rspec",       "~> 2.10.0"
   gem "rack-test",   "~> 0.6.1"
 end
+
+group :production do
+  gem "thin"
+end
