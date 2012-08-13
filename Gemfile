@@ -8,6 +8,9 @@ gem "settingslogic", "~> 2.0.8"
 gem "mongoid",       "~> 3.0.0"
 gem "oj",            "~> 1.3.4"
 gem "heroku_san",    "~> 3.0.2"
+gem "rails_admin"
+gem "devise",        "~> 2.1.2"
+
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -32,5 +35,3 @@ group :development, :test do
   gem "rspec",       "~> 2.10.0"
   gem "rack-test",   "~> 0.6.1"
 end
-
-
