@@ -3,13 +3,13 @@
 %ul.activities
   - @activities.each do |activity|
     %li.activity
-      .name= activity["name"]
-      .code= activity["code"]
-      .when= activity["when"]
-      .where= activity["where"]
+      .name= activity.name
+      .code= activity.code
+      .when= activity.when
+      .where= activity.where
 
       %ul.participations
-        - activity["participations"].each do |participation|
+        - activity.participations.each do |participation|
           %li.participation
             %a(href="https://twitter.com/#{participation.account}" title="View #{participation.account} on Twitter")
               %img(src="https://api.twitter.com/1/users/profile_image/#{participation.account}" alt="Avatar for #{participation.account}")
