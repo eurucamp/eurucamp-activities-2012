@@ -16,9 +16,6 @@ body
         img
           width: 100%
 
-    nav
-      display: none
-
 
     +respond-to(mid-range)
       h1
@@ -31,46 +28,6 @@ body
       +clearfix
       padding: 1em 0 0 0
 
-      nav
-        display: block
-        border-top: 1px dotted $grey
-        margin: 1em auto 0 auto
-        padding: 0.5em 1em 0
-        z-index: 1000
-
-        ul
-          +unlisted
-          line-height: 1.75em
-
-          li
-            display: inline-block
-            margin: 0 1em
-
-            a
-              color: $dark-grey
-              +text-inset
-              +caps
-              +custom-sans(bold)
-              +transition(color 0.5s)
-
-              &:hover
-                color: $brand-2
-                +transition(color 0.5s)
-
-              &.active
-                border-bottom: 3px solid $brand-2
-
 
     +respond-to(tablet-oversize)
       background: white
-      +at-night
-        background: $black
-
-      nav
-        ul
-          li
-            a
-              +at-night
-                color: $brand-1
-                +no-text-shadow
-

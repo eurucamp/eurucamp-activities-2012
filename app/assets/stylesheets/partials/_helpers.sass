@@ -11,7 +11,7 @@
   $folder: ""
   @if $scoped
     $folder: "#{$scope}/"
-  background-image: url(/images/layout/#{$folder}#{$path})
+  background-image: url(image_path("layout/#{$folder}#{$path}"))
   @if $repeat == false
     background-repeat: no-repeat
   @else
