@@ -12,12 +12,11 @@
     %link(href="apple-touch-icon-114x114-precomposed.png" sizes="114x114" rel="apple-touch-icon")
 
     = stylesheet_link_tag "application", :media => "all"
-    = javascript_include_tag "application"
     = csrf_meta_tags
-
-    %script(src="/javascripts/lib/modernizr.js")
+    = javascript_include_tag "lib/modernizr"
 
     :javascript
+      var BG_PATH = '#{asset_path 'layout/background.jpg '}';
       Modernizr.load([
         {
           test: Modernizr.mq('only all'),
@@ -29,7 +28,7 @@
             try { Typekit.load(); } catch(e) {};
           }
         },{
-          load: '/javascripts/application.js'
+          load: '#{asset_path 'application.js'}'
         }
       ]);
 
