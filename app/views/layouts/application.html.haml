@@ -37,6 +37,8 @@
 
   %body
     #container
+      = render 'shared/header'
       #main(role="main")
         = yield
+      = render 'shared/footer'
 
