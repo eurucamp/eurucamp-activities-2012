@@ -1,0 +1,117 @@
+body
+  color: $dark-grey
+  @if $scope == 'jrubyconf'
+    background: lighten($grey, 5%)
+  @else
+    background-color: $white
+    +at-night
+      background-color: $black
+
+  a
+    color: $brand-1
+    text-decoration: none
+
+    &:hover
+      color: $brand-2
+      +transition(color 1.0s)
+
+  article
+    +clearfix
+    background: white
+
+    header
+      +padded
+      text-align: center
+      color: $dark-grey
+
+      h2
+        +brand-stripe(0, $brand-3, false)
+        padding: 0.5em
+        margin: -1.33333em 0 0 0
+        display: block
+        +custom-sans(black)
+        +at-night
+          background-color: $brand-3
+
+      h3
+        z-index: 400
+        color: $medium-grey
+        background: none
+        +custom-sans(bold, false)
+        +text-shadow(0 1px 0 white)
+
+    h3
+      +custom-sans(bold, false)
+
+    h4, h5, h6
+      +custom-sans(bold)
+
+    h3, h4, h5, h5
+      margin-bottom: 0.25em
+      color: $medium-grey
+
+    h5
+      +custom-sans(bold)
+      font-size: 1.2em
+      margin-bottom: 0.25em
+
+    address
+      font-style: normal
+
+    .price
+      background: $grey
+      +custom-sans(bold, false)
+      color: $dark-grey
+      +text-inset
+      +border-radius(1em)
+      padding: 0.15em 0.45em 0 0.45em
+
+    .resp-video
+      position: relative
+      padding-bottom: 56.25%
+      //padding-top: 30px
+      height: 0
+      overflow: hidden
+
+    .resp-video iframe,
+    .resp-video object,
+    .resp-video embed
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+
+    section
+      +padded
+
+    hr
+      background-color: $grey
+      border-width: 0
+      color: $grey
+      height: 1px
+      line-height: 0
+      page-break-after: always
+      text-align: center
+
+  +respond-to(tablet-lite)
+    article
+      header
+        h2
+          margin-top: -0.75em
+
+
+  +respond-to(tablet-landscape)
+    article
+      header
+        h2
+          margin-top: -1.33333em
+
+
+  +respond-to(tablet-oversize)
+    article
+      header
+        h2
+          margin: -1.33333em -2em 0 -2em
+          +transform(rotate(-2deg))
+          +shadowed

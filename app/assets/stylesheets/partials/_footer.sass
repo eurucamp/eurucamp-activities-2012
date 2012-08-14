@@ -1,0 +1,143 @@
+body
+  #footer
+    clear: both
+    +clearfix
+    text-align: center
+    background: $black
+
+    html.no-js &
+      background: $black
+
+    .primary-navigation
+      margin: 0 0 2em 0
+
+      ul
+        +unlisted
+
+        li
+          a
+            padding: 0.5em 1em
+            text-align: left
+            display: block
+            font-weight: bold
+            color: $white
+            +custom-sans(bold)
+            border-bottom: 1px dotted $dark-grey
+            +transition(color 0.5s, background-color 0.5s)
+
+            &:hover
+              background-color: $brand-2
+              +transition(color 0.5s, background-color 0.5s)
+
+            &.active
+              border-left: 5px solid $brand-2
+
+    .secondary-navigation
+      ul
+        +unlisted
+
+        li
+          display: inline
+          margin: 0 1em
+          font-size: 0.8em
+
+          a
+            color: $grey
+            +custom-sans(bold)
+            +transition(color 0.5s)
+
+            &:hover
+              color: $brand-2
+              +transition(color 0.5s)
+
+    ul.links
+      +unlisted
+      margin: 1em auto
+
+      li
+        display: inline-block
+        margin: 0 0.5em 0 0
+
+        a
+          display: block
+          text-indent: -999em
+          width: 40px
+          height: 40px
+          opacity: 0.75
+          +transition(opacity, 0.5s)
+          +image('footer/twitter_icon.png')
+
+          &:hover
+            opacity: 1
+            +transition(opacity, 0.5s)
+
+        &.lanyrd
+          a
+            +image('footer/lanyrd_icon.png')
+
+        &.facebook
+          a
+            +image('footer/facebook_icon.png')
+
+        &.google-plus
+          a
+            +image('footer/google_plus_icon.png')
+
+    a.twin
+      margin: 0
+      display: block
+      padding: 1em
+      +clearfix
+      color: $dark-red
+      @if $scope == 'jrubyconf'
+        color: $pink
+      background: $grey
+      +transition(background-color 0.5s)
+
+      small
+        display: block
+        margin-bottom: 1em
+
+      img
+        width: 100%
+
+      &:hover
+        border: none
+        background-color: $white
+        +transition(background-color 0.5s)
+
+
+    +respond-to(mid-range)
+      a.twin
+        img
+          width: auto
+
+
+    +respond-to(tablet-lite)
+      padding: 1em 0
+      text-align: center
+
+      a.twin
+        margin: -1em 0 1em 0
+
+      .primary-navigation
+        display: none
+
+      .secondary-navigation
+        float: right
+
+      ul.links
+        margin: 0 1em
+        float: left
+
+
+    +respond-to(tablet-landscape)
+      padding-bottom: 1em
+
+
+    +respond-to(tablet-oversize)
+      background: none
+
+
+    +respond-to(desktop)
+      margin: 0

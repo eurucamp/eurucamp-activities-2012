@@ -1,0 +1,108 @@
+body
+  background-color: $black
+  +custom-serif
+
+  #container
+    width: 100%
+    overflow: hidden
+
+  a.theme-toggle
+    display: none
+    width: 30px
+    height: 30px
+    +image('theme_toggle.png', false, bottom center)
+    text-indent: -999em
+    position: fixed
+    top: 0.5em
+    right: 0.5em
+    opacity: 0.25
+
+    &:hover
+      opacity: 1
+
+    +at-night
+      background-position: top center
+
+  a.jump-to-nav
+    color: $white
+    display: block
+    height: 2em
+    line-height: 2em
+    padding: 0 1em
+    text-align: right
+    border-bottom: 1px solid $grey
+    background: white
+    vertical-align: middle
+
+  .fork-on-github
+    position: absolute
+    top: 0
+    left: 0
+    width: 150px
+    height: 150px
+    overflow: hidden
+    display: none
+
+    a
+      display: block
+      width: 190px
+      background: $brand-1
+      padding: 1px 0
+      position: relative
+      top: 40px
+      left: -40px
+      text-align: center
+      +transform(rotate(-45deg))
+      +shadowed
+      +transition(left 0.25s)
+
+      &:hover
+        left: -37px
+        +transition(left 0.25s)
+
+      span
+        color: $white
+        display: block
+        +custom-sans(bold)
+        +text-shadow(0 -1px 0 darken($brand-1, 10%))
+        font-size: 0.8em !important
+        border-top: 1px dotted $grey
+        border-bottom: 1px dotted $grey
+        padding: 0 0 0.15em 0
+
+
+  +respond-to(tablet-lite)
+    a.jump-to-nav
+      display: none
+
+
+  +respond-to(tablet-portrait)
+    font-size: 1.1em
+
+
+  +respond-to(tablet-landscape)
+    font-size: 1.2em
+    width: 1024px
+    margin: 0 auto
+
+    a.jump-to-nav
+      background: white
+      +at-night
+        background: $black
+        border-color: $dark-grey
+
+    .fork-on-github
+      display: block
+
+  +respond-to(tablet-oversize)
+    #container
+      overflow: visible
+
+    a.theme-toggle
+      display: block
+
+
+  +respond-to(desktop)
+    #container
+      padding: 0 0 2em 0
+      overflow: visible
