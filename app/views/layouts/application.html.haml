@@ -1,0 +1,42 @@
+!!! 5
+- html_tag :class => 'no-js' do
+  %head
+    %meta(charset="utf-8")
+    %meta(content="IE=edge,chrome=1" http-equiv="X-UA-Compatible")
+    %title Activities | Eurucamp 2012
+    %meta(content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport")
+
+    %link(href="favicon.ico" rel="shortcut icon")
+    %link(href="apple-touch-icon-57x57-precomposed.png" rel="apple-touch-icon")
+    %link(href="apple-touch-icon-72x72-precomposed.png" sizes="72x72" rel="apple-touch-icon")
+    %link(href="apple-touch-icon-114x114-precomposed.png" sizes="114x114" rel="apple-touch-icon")
+
+    = stylesheet_link_tag "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+    %script(src="/javascripts/lib/modernizr.js")
+
+    :javascript
+      Modernizr.load([
+        {
+          test: Modernizr.mq('only all'),
+          nope: '/javascripts/lib/mq_polyfill.js'
+        },{
+          test: Modernizr.fontface,
+          yep : 'http://use.typekit.com/uxm6bkh.js',
+          complete: function() {
+            try { Typekit.load(); } catch(e) {};
+          }
+        },{
+          load: '/javascripts/application.js'
+        }
+      ]);
+
+    = render 'shared/analytics'
+
+  %body
+    #container
+      #main(role="main")
+        = yield
+
