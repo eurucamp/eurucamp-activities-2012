@@ -2,14 +2,15 @@
   = wrapped :header do
     %h2 Activities
 
-  = wrapped :section, :class => 'intro' do
-    %ul.activities
+  = wrapped :section, :class => 'activities' do
+    %ul
       - @activities.each do |activity|
-        %li.activity
-          .name= activity.name
-          .code= activity.code
-          .when= activity.when
-          .where= activity.where
+        = wrapped :li do
+          %strong= activity.name
+          %em= pluralize activity.participations.count, "Participant"
+          %span.code= activity.code
+          %span.when= activity.when
+          %span.where= activity.where
 
           %ul.participations
             - activity.participations.each do |participation|
