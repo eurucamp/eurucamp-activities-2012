@@ -17,3 +17,5 @@
 .idea
 *.iml
 TODO.md
+.DS_Store
+.sass-cache
