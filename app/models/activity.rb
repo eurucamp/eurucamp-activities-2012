@@ -20,6 +20,7 @@ class Activity
 
   accepts_nested_attributes_for :participations
 
+  default_scope order_by(:when => :asc)
   scope :published, where(:published => true)
 end
 
