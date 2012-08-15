@@ -7,13 +7,17 @@
       - @activities.each do |activity|
         = wrapped :li do
           %strong= activity.name
-          %em= pluralize activity.participations.count, "Participant"
-          %span.code= activity.code
-          %span.when= activity.when
-          %span.where= activity.where
-
-          %ul.participations
-            - activity.participations.each do |participation|
-              %li.participation
-                %a(href="https://twitter.com/#{participation.account}" title="View #{participation.account} on Twitter")
-                  %img(src="https://api.twitter.com/1/users/profile_image/#{participation.account}" alt="Avatar for #{participation.account}")
+          %em(title="#{pluralize activity.participations.count, "participant"}")
+            = activity.participations.count
+          %span
+            = activity.when.strftime '%A, %H:%M'
+            %br
+            = activity.where
+          .participants
+            %span Participants
+            %ul.participations
+              - activity.participations.each do |participation|
+                %li.participation
+                  %a(href="https://twitter.com/#{participation.account}" title="View #{participation.account} on Twitter")
+                    %img(src="https://api.twitter.com/1/users/profile_image/#{participation.account}" alt="Avatar for #{participation.account}")
+          %code(title="Participations code '##{activity.code}'")= "##{activity.code}"

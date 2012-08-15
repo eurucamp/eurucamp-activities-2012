@@ -10,10 +10,82 @@ article
       float: left
 
       & > .wrapper
-        height: 200px
-        overflow: hidden
-
+        height: 7em
+        padding: 1em
         text-align: center
         +padded
+        +shadowed
         border: 1px solid $grey
+        +border-radius(0 0 0.5em 0.5em)
 
+        // headline
+        strong
+          display: block
+          +custom-sans(bold)
+          font-size: 1.2em
+          margin-bottom: 0.5em
+
+        & > span
+          font-size: 0.9em
+          color: $medium-grey
+          line-height: 0.5em
+
+        // participants #
+        em
+          float: none
+          position: absolute
+          right: -1em
+          top: 0.5em
+          width: 2.5em
+          height: 2.5em
+          line-height: 2.5em
+          text-align: center
+          background: transparentize($brand-2, 0.2)
+          +border-radius(1.5em)
+          color: $white
+          font-style: normal
+          +no-text-shadow
+          +custom-sans(light)
+
+        code
+          display: block
+          position: absolute
+          bottom: -0px
+          right: -1px
+          left: -1px
+          background: $green
+          font-size: 0.8em
+          color: $medium-grey
+          padding: 0.5em
+          color: $white
+          +border-radius(0 0 0.5em 0.5em)
+          +prefixer(text-overflow, ellipsis)
+
+        .participants
+          +clearfix
+          padding: 0.5em 0 1.5em 0
+          margin-top: 1em
+          border-top: 1px dotted $grey
+          display: none
+
+          span
+            +custom-sans-condensed
+            display: block
+            margin-bottom: 0.75em
+            color: $dark-grey
+
+          ul
+            li
+              float: left
+              width: 25%
+
+              a
+                img
+                  width: 100%
+
+        &:hover
+          height: auto
+          cursor: pointer
+
+          .participants
+            display: block
