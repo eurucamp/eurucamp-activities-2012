@@ -8,11 +8,11 @@ module ApplicationHelper
     end
   end
 
-  def image(url, sizes = [], attrs = {})
-    attrs[:src] = url
+  def image(path, sizes = [], attrs = {})
+    attrs[:src] = image_path(path)
     attrs = inject_class(attrs, 'resp')
     sizes.each do |size|
-      attrs[:"data-#{size}"] = image_url_for_size(url, size)
+      attrs[:"data-#{size}"] = image_path(image_url_for_size(path, size))
     end
     capture_haml do
       haml_tag :img, attrs
