@@ -6,15 +6,13 @@ article
     +padded
 
     & > .wrapper > ul  > li
-      width: 33.333333%
-      float: left
 
       & > .wrapper
         height: 7em
         padding: 1em
         text-align: center
-        +padded
         +shadowed
+        margin: 0 0 1em 0
         border: 1px solid $grey
         +border-radius(0 0 0.5em 0.5em)
 
@@ -89,3 +87,31 @@ article
 
           .participants
             display: block
+
+
+
+
+  +respond-to(smartphone-landscape)
+    section.activities
+      & > .wrapper > ul  > li
+        width: 50%
+        float: left
+
+        & > .wrapper
+          margin: 0.75em
+
+
+  +respond-to(tablet-portrait)
+    section.activities
+      & > .wrapper > ul  > li
+        & > .wrapper
+          margin: 1em
+
+
+  +respond-to(tablet-portrait)
+    section.activities
+      & > .wrapper > ul  > li
+        width: 33.333333%
+
+        & > .wrapper
+          margin: 1.5em
