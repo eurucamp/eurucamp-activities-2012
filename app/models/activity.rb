@@ -10,6 +10,7 @@ class Activity
   field :name,      :type => String
   field :where,     :type => String
   field :when,      :type => DateTime
+  field :prerequisites, :type => String
 
   validates :code,  :presence => true, :allow_blank => false, :uniqueness => true
   validates :name,  :presence => true, :allow_blank => false
