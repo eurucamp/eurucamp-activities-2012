@@ -12,16 +12,11 @@ gem "rails_admin"
 gem "devise",        "~> 2.1.2"
 gem "frontend-helpers"
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem "sass",         "~> 3.2.0"
   gem "sass-rails",   "~> 3.2.3"
   gem "coffee-rails", "~> 3.2.1"
   gem "bourbon"
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem "therubyracer", :platforms => :ruby
 
   gem "uglifier", ">= 1.0.3"
 end
@@ -33,7 +28,11 @@ group :development do
 end
 
 group :development, :test do
-  gem "rspec",       "~> 2.10.0"
+  gem "rspec-rails"
+  gem "webmock"
+  gem "timecop"
+  gem "mongoid-rspec"
+  gem "database_cleaner"
   gem "rack-test",   "~> 0.6.1"
 end
 
