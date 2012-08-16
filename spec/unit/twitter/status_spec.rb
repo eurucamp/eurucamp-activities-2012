@@ -6,7 +6,7 @@ describe Twitter::Status do
 
   context "valid structure" do
     context "'in' message" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin #DRN")] }
+      let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin#DRN  ")] }
 
       its(:in?)  { should     be     }
       its(:out?) { should_not be     }
@@ -14,7 +14,7 @@ describe Twitter::Status do
     end
 
     context "'out' message" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest #imout #DRN")] }
+      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #imout   #DRN")] }
 
       its(:in?)  { should_not be     }
       its(:out?) { should     be     }
