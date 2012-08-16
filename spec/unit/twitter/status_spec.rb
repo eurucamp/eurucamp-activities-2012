@@ -32,18 +32,29 @@ describe Twitter::Status do
 
   context "invalid structure" do
 
-    context "'in' token first" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ")] }
-      its(:in?)  { should     be     }
-      its(:out?) { should_not be     }
-      its(:code) { should == "#imout joker" }
+    context "two tokens" do
+
+      context "'in' token first" do
+        let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ")] }
+        its(:in?)  { should     be     }
+        its(:out?) { should_not be     }
+        its(:code) { should == "#imout joker" }
+      end
+
+      context "'out' token first" do
+        let(:args) { [default_args.merge(:text => "@eurucamplivetest, #imout #imin joker  ")] }
+        its(:in?)  { should_not be     }
+        its(:out?) { should     be     }
+        its(:code) { should == "#imin joker" }
+      end
+
     end
 
-    context "'out' token first" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest, #imout #imin joker  ")] }
-      its(:in?)  { should_not be     }
-      its(:out?) { should     be     }
-      its(:code) { should == "#imin joker" }
+    context "wrong order" do
+      let(:args) { [default_args.merge(:text => "@eurucamplivetest hahha #imin #DRN")] }
+      its(:in?)  { should_not be }
+      its(:out?) { should_not be }
+      its(:code) { should_not be }
     end
 
   end
