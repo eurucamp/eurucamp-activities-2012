@@ -1,4 +1,8 @@
 class FetchStatusesJob
+  def perform
+    run!
+  end
+
   def run!
     query = "to:#{Settings.twitter.account} '#{Settings.twitter.tokens.im_in} OR #{Settings.twitter.tokens.im_out}'"
 
