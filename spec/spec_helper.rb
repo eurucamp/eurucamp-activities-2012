@@ -11,13 +11,13 @@ RSpec.configure do |config|
   config.include Mongoid::Matchers
   config.infer_base_class_for_anonymous_controllers = false
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.orm      = "mongoid"
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.clean
-  end
+  #config.before(:suite) do
+  #  DatabaseCleaner.strategy = :truncation
+  #  DatabaseCleaner.orm      = "mongoid"
+  #end
+  #
+  #config.before(:each) do
+  #  DatabaseCleaner.clean
+  #end
 
 end

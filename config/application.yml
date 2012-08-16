@@ -9,7 +9,11 @@ development:
   <<: *defaults
 
 test:
-  <<: *defaults
+  twitter:
+    account: "eurucamplivetest"
+    tokens:
+      im_in: "#imin"
+      im_out: "#imout"
 
 production:
   <<: *defaults
