@@ -13,9 +13,12 @@ class FetchStatusesJob
         if status.in? && !activity.participations.where(args).exists?
           activity.participations.create(args)
           Twitter.update("@#{status.from_user} #{Settings.twitter.messages.in} #{status.code}") rescue nil
-        elsif status.out? && activity.participations.where(args).exists?
-          activity.participations.delete_all(args)
-          Twitter.update("@#{status.from_user} #{Settings.twitter.messages.out} #{status.code}") rescue nil
+        elsif status.out?
+          participation = activity.participations.where(args).first
+          if participation && status.created_at > participation.created_at
+            activity.participations.delete_all(args)
+            Twitter.update("@#{status.from_user} #{Settings.twitter.messages.out} #{status.code}") rescue nil
+          end
         end
       end
     end
