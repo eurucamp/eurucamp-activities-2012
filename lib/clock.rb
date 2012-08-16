@@ -4,4 +4,4 @@ require 'clockwork'
 
 include Clockwork
 
-every(1.minutes, 'Queueing interval job') { Delayed::Job.enqueue IntervalJob.new }
+every(1.minutes, 'Queueing interval job') { Delayed::Job.enqueue FetchStatusesJob.new }
