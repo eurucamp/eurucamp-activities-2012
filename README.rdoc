@@ -24,6 +24,8 @@ If you haven't changed anything:
 * message format is `<ACCOUNT> <TOKEN> <EVENT/ACTIVITY CODE>`, for example: `@Eactivitiestest #imin DKN` means: `i'm participating in drinkup`
 * admin panel is mounted at `/admin` (default: `info+activities@fake.com` / `dontuseinproduction` )
 
+You still need to set ENV variables if you want to post to Twitter (worker)
+
 ### Activities
 
 Activities can be configured in admin panel.
