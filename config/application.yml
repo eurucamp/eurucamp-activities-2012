@@ -1,6 +1,9 @@
 defaults: &defaults
   twitter:
     account: "Eactivitiestest"
+    messages:
+      in: "great, see you there!"
+      out: "participation removed!"
     tokens:
       im_in: "#imin"
       im_out: "#imout"
@@ -11,6 +14,9 @@ development:
 test:
   twitter:
     account: "eurucamplivetest"
+    messages:
+      in: "great, see you there!"
+      out: "participation removed!"
     tokens:
       im_in: "#imin"
       im_out: "#imout"
