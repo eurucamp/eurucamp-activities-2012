@@ -12,10 +12,10 @@ class FetchStatusesJob
         args = {:code => status.code, :account => status.from_user}
         if status.in? && !activity.participations.where(args).exists?
           activity.participations.create(args)
-          Twitter.update("@#{status.from_user} #{Settings.twitter.messages.in}")
+          Twitter.update("@#{status.from_user} #{Settings.twitter.messages.in}") rescue nil
         elsif status.out? && activity.participations.where(args).exists?
           activity.participations.delete_all(args)
-          Twitter.update("@#{status.from_user} #{Settings.twitter.messages.out}")
+          Twitter.update("@#{status.from_user} #{Settings.twitter.messages.out}") rescue nil
         end
       end
     end
