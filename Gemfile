@@ -32,8 +32,8 @@ group :development, :test do
   gem "webmock"
   gem "timecop"
   gem "mongoid-rspec"
-  gem "database_cleaner"
-  gem "rack-test",   "~> 0.6.1"
+  gem "database_cleaner", "~> 0.8.0"
+  gem "rack-test",        "~> 0.6.1"
 end
 
 group :production do
