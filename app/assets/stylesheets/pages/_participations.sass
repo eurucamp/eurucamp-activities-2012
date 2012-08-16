@@ -8,7 +8,7 @@ article
     & > .wrapper > ul  > li
 
       & > .wrapper
-        height: 7em
+        height: 9em
         padding: 1em
         text-align: center
         +shadowed
@@ -27,6 +27,9 @@ article
           font-size: 0.9em
           color: $medium-grey
           line-height: 0.5em
+
+          span.legend
+            font-style: italic
 
         // participants #
         em
@@ -87,8 +90,6 @@ article
 
           .participants
             display: block
-
-
 
 
   +respond-to(smartphone-landscape)

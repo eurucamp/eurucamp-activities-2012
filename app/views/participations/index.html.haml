@@ -14,8 +14,8 @@
             %br
             = activity.where
             %br
-            -# TODO
-            = activity.prerequisites
+            %span.legend Bring:
+            = activity.prerequisites || '&mdash;'.html_safe
           .participants
             %span Participants
             %ul.participations
