@@ -8,8 +8,7 @@ article
     & > .wrapper > ul  > li
 
       & > .wrapper
-        height: 9em
-        padding: 1em
+        padding: 1em 1em 2.5em 1em
         text-align: center
         +shadowed
         margin: 0 0 1em 0
@@ -98,6 +97,9 @@ article
         width: 50%
         float: left
 
+        &:nth-child(odd)
+          clear: left
+
         & > .wrapper
           margin: 0.75em
 
@@ -105,6 +107,12 @@ article
   +respond-to(tablet-portrait)
     section.activities
       & > .wrapper > ul  > li
+        &:nth-child(odd)
+          clear: none
+
+        &:nth-child(4n+4)
+          clear: left
+
         & > .wrapper
           margin: 1em
 
