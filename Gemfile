@@ -29,9 +29,12 @@ group :development do
   gem "heroku",      :require => false
 end
 
+group :test do
+  gem "webmock"
+end
+
 group :development, :test do
   gem "rspec-rails"
-  gem "webmock"
   gem "timecop"
   gem "mongoid-rspec"
   gem "database_cleaner", "~> 0.8.0"
