@@ -1,6 +1,14 @@
 article
+
   ul
     +unlisted
+
+  .hint
+    margin-left: auto
+    margin-right: auto
+    width: 55%
+    text-align: center
+    border-bottom: 2px dashed $grey
 
   section.activities
     +padded
@@ -110,7 +118,7 @@ article
         &:nth-child(odd)
           clear: none
 
-        &:nth-child(4n+4)
+        &:nth-child(3n+4)
           clear: left
 
         & > .wrapper
