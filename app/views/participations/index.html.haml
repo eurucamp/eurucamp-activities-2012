@@ -2,6 +2,10 @@
   = wrapped :header do
     %h2 Activities
 
+  = wrapped :section, :class => 'hint' do
+    %pre
+      @eurucamplive (#imin|#imout) #ACTIVITYHASHTAG
+
   = wrapped :section, :class => 'activities' do
     %ul
       - @activities.each do |activity|
