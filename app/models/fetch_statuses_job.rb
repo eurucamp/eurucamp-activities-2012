@@ -15,7 +15,9 @@
           #Twitter.update("@#{status.from_user} #{Settings.twitter.messages.in} #{status.code}") rescue nil
         elsif status.out?
           participation = activity.participations.where(args).first
-          if participation && status.created_at > participation.created_at.utc
+          Rails.logger.info("status = #{status.created_at.inspect}, participation = #{participation.created_at.utc}")
+          if participation
+            #&& status.created_at > participation.created_at.utc
             activity.participations.delete_all(args)
             #Twitter.update("@#{status.from_user} #{Settings.twitter.messages.out} #{status.code}") rescue nil
           end
