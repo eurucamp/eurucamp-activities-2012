@@ -23,3 +23,11 @@ test:
 
 production:
   <<: *defaults
+  twitter:
+    account: "eurucamplive"
+    messages:
+      in: "great, see you there!"
+      out: "participation removed!"
+    tokens:
+      im_in: "#imin"
+      im_out: "#imout"
