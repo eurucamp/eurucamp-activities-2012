@@ -2,9 +2,22 @@ require "spec_helper"
 
 describe Twitter::Status do
 
-  context "parsing" do
+  context "parser" do
     subject { Twitter::Status.new(*args) }
     let(:default_args) { {:id => 1, :from_user => "xxx", :to_user => "eurucamplivetest"} }
+
+    context "returns downcased code" do
+      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #iMout   #drN")] }
+      its(:code) { should == "#drn"  }
+    end
+
+    context "is not case-sensitive" do
+      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #iMout   #drN")] }
+
+      its(:in?)  { should_not be     }
+      its(:out?) { should     be     }
+      its(:code) { should == "#drn"  }
+    end
 
     context "valid structure" do
       context "'in' message" do
@@ -12,7 +25,7 @@ describe Twitter::Status do
 
         its(:in?)  { should     be     }
         its(:out?) { should_not be     }
-        its(:code) { should == "#DRN"  }
+        its(:code) { should == "#drn"  }
       end
 
       context "'out' message" do
@@ -20,7 +33,7 @@ describe Twitter::Status do
 
         its(:in?)  { should_not be     }
         its(:out?) { should     be     }
-        its(:code) { should == "#DRN"  }
+        its(:code) { should == "#drn"  }
       end
 
       context "other message" do
