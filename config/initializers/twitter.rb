@@ -8,7 +8,7 @@ Twitter::Status.class_eval do
   end
 
   def valid?
-    !code.blank? || (in? || out?)
+    !code.blank? && ((in? && !out?) || (!in? && out?))
   end
 
   def code

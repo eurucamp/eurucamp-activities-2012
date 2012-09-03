@@ -20,14 +20,13 @@ describe Twitter::Status do
     end
 
     context "valid structure" do
-      #context "'in' message" do
-      #  pending
-      #  let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin#DRN  ", :entities => {:hashtags => []})] }
-      #
-      #  its(:in?)  { should     be     }
-      #  its(:out?) { should_not be     }
-      #  its(:code) { should == "drn"  }
-      #end
+      context "'in' message" do
+        let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin #DRN  ", :entities => {:hashtags => [{:text => "imin"}, {:text => "DRN"}]})] }
+
+        its(:in?)  { should     be     }
+        its(:out?) { should_not be     }
+        its(:code) { should == "drn"  }
+      end
 
       context "'out' message" do
         let(:args) { [default_args.merge(:text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
@@ -42,28 +41,8 @@ describe Twitter::Status do
 
         its(:in?)  { should_not be     }
         its(:out?) { should_not be     }
+        it {         should_not be_valid }
         its(:code) { should  == "nice" }
-      end
-    end
-
-    context "invalid structure" do
-
-      context "two tokens" do
-
-        context "'in' token first" do
-          let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
-          its(:in?)  { should     be     }
-          its(:out?) { should     be     }
-          its(:code) { should     be_nil }
-        end
-
-        context "'out' token first" do
-          let(:args) { [default_args.merge(:text => "@eurucamplivetest, #imout #imin joker  ", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"imin"}]})] }
-          its(:in?)  { should     be     }
-          its(:out?) { should     be     }
-          its(:code) { should     be_nil }
-        end
-
       end
 
       context "wrong order" do
@@ -71,6 +50,38 @@ describe Twitter::Status do
         its(:in?)  { should     be }
         its(:out?) { should_not be }
         its(:code) { should ==  "drn" }
+      end
+
+      context "two codes" do
+        let(:args) { [default_args.merge(:text => "@eurucamplivetest #xxx #imin #drn joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"xxx"}, {:text => "drn"}]})] }
+        its(:in?)  { should     be     }
+        its(:out?) { should_not be     }
+        it {         should     be_valid }
+        its(:code) { should ==  "xxx" }
+      end
+
+    end
+
+    context "invalid structure" do
+
+      context "two tokens" do
+
+        context "no code" do
+          let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
+          its(:in?)  { should     be     }
+          its(:out?) { should     be     }
+          it {         should_not be_valid }
+          its(:code) { should     be_nil }
+        end
+
+        context "with code" do
+          let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker #DRN ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}, {:text => "DRN"}]})] }
+          its(:in?)  { should     be     }
+          its(:out?) { should     be     }
+          it {         should_not be_valid }
+          its(:code) { should  == "drn" }
+        end
+
       end
 
     end
