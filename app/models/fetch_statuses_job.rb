@@ -1,4 +1,4 @@
-  class FetchStatusesJob
+class FetchStatusesJob
   def perform
     run!
   end
