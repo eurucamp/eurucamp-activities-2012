@@ -7,7 +7,7 @@ namespace :utils do
         "#OREILLY"        => 6
     }
 
-    WHITEBOARD_PEOPLE = {
+    BLACKBOARD_PEOPLE = {
         "#OREILLY" => %w(chrisberkhout MichaelP codezeilen shime.rb erotte abrirjam nerdbabe UdoJ),
         "#CHEMEX"  => %w(chrisberkhout norbertc errote),
         "#BUBBLE"  => %w(BenjaminMichenrv africajam nerdbabe MichaelP africajam nerdbabe MichaelP dimitritievely)
@@ -25,7 +25,7 @@ namespace :utils do
     WINNERS = {}
 
     CONTESTS.each do |c|
-      WINNERS[c.first] = ((DB_PEOPLE[c.first] || []) + (WHITEBOARD_PEOPLE[c.first] || []) -  PEOPLE_TO_REJECT).map(&:downcase).uniq.shuffle.sample(c.last.to_i)
+      WINNERS[c.first] = ((DB_PEOPLE[c.first] || []) + (BLACKBOARD_PEOPLE[c.first] || []) -  PEOPLE_TO_REJECT).map(&:downcase).uniq.shuffle.sample(c.last.to_i)
     end
 
     pp WINNERS
