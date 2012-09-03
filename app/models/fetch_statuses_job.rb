@@ -9,7 +9,7 @@ class FetchStatusesJob
     SortedSet.new(Twitter.search(query, :rpp => 100, :result_type => "recent", :include_entities => true).results).map do |status|
       activity = Activity.where(:code => status.code).first
       if activity
-        args = {:code => status.code, :account => status.from_user}
+        args = {:account => status.from_user}
         if status.in? && !activity.participations.where(args).exists?
           activity.participations.create(args)
         elsif status.out?
