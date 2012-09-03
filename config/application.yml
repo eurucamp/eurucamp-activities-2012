@@ -5,8 +5,8 @@ defaults: &defaults
       in: "great, see you there!"
       out: "participation removed!"
     tokens:
-      im_in: "#imin"
-      im_out: "#imout"
+      im_in: "imin"
+      im_out: "imout"
 
 development:
   <<: *defaults
@@ -18,8 +18,8 @@ test:
       in: "great, see you there!"
       out: "participation removed!"
     tokens:
-      im_in: "#imin"
-      im_out: "#imout"
+      im_in: "imin"
+      im_out: "imout"
 
 production:
   <<: *defaults
@@ -29,5 +29,5 @@ production:
       in: "great, see you there!"
       out: "participation removed!"
     tokens:
-      im_in: "#imin"
-      im_out: "#imout"
+      im_in: "imin"
+      im_out: "imout"

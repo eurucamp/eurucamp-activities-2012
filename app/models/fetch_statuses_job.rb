@@ -6,7 +6,7 @@
   def run!
     query = "to:#{Settings.twitter.account} '#{Settings.twitter.tokens.im_in} OR #{Settings.twitter.tokens.im_out}'"
 
-    SortedSet.new(Twitter.search(query, :rpp => 100, :result_type => "recent").results).map do |status|
+    SortedSet.new(Twitter.search(query, :rpp => 100, :result_type => "recent", :include_entities => true).results).map do |status|
       activity = Activity.where(:code => status.code).first
       if activity
         args = {:code => status.code, :account => status.from_user}
