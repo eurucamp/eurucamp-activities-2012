@@ -5,7 +5,7 @@ class Activity
 
   has_many :participations
 
-  field :published, :type => Boolean
+  field :published, :type => Boolean, :default => false
   field :code,      :type => String
   field :name,      :type => String
   field :where,     :type => String
@@ -23,6 +23,10 @@ class Activity
 
   default_scope order_by(:when => :asc)
   scope :published, where(:published => true)
+
+  before_validation do |a|
+    a.code = a.code.try(:downcase)
+  end
 end
 
 
