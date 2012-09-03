@@ -13,10 +13,7 @@
         if status.in? && !activity.participations.where(args).exists?
           activity.participations.create(args)
         elsif status.out?
-          participation = activity.participations.where(args).first
-          if participation
-            activity.participations.delete_all(args)
-          end
+          activity.participations.delete_all(args) if activity.participations.where(args).exists?
         end
       end
     end
