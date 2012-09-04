@@ -2,98 +2,16 @@ require "spec_helper"
 
 describe Twitter::Status do
 
-  context "parser" do
-    subject { Twitter::Status.new(*args) }
-    let(:default_args) { {:id => 1, :from_user => "xxx", :to_user => "eurucamplivetest"} }
+  let(:default_left_args)  { {:id => 1, :from_user => "xxx", :to_user => "eurucamplivetest"} }
+  let(:default_right_args) { {:id => 2, :from_user => "yyy", :to_user => "eurucamplivetest"} }
+  let(:left_args)          { [default_left_args]                                             }
+  let(:right_args)         { [default_right_args]                                            }
 
-    context "returns downcased code" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #iMout   #drN", :entities => {:hashtags => [{:text=>"iMout"}, {:text=>"drN"}]})] }
-      its(:code) { should == "drn"  }
-    end
 
-    context "is not case-sensitive" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #iMout   #drN", :entities => {:hashtags => [{:text=>"iMout"}, {:text=>"drN"}]})] }
+  let(:left)               { Twitter::Status.new(*left_args)                                 }
+  let(:right)              { Twitter::Status.new(*right_args)                                }
 
-      its(:in?)  { should_not be     }
-      its(:out?) { should     be     }
-      its(:code) { should == "drn"  }
-    end
-
-    context "valid structure" do
-      context "'in' message" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin #DRN  ", :entities => {:hashtags => [{:text => "imin"}, {:text => "DRN"}]})] }
-
-        its(:in?)  { should     be     }
-        its(:out?) { should_not be     }
-        its(:code) { should == "drn"  }
-      end
-
-      context "'out' message" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
-
-        its(:in?)  { should_not be     }
-        its(:out?) { should     be     }
-        its(:code) { should == "drn"  }
-      end
-
-      context "other message" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest #nice #T-Shirt Alex!", :entities => {:hashtags => [{:text=>"nice"}, {:text=>"T-Shirt"}]})] }
-
-        its(:in?)  { should_not be     }
-        its(:out?) { should_not be     }
-        it {         should_not be_valid }
-        its(:code) { should  == "nice" }
-      end
-
-      context "wrong order" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest hahha #imin #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
-        its(:in?)  { should     be }
-        its(:out?) { should_not be }
-        its(:code) { should ==  "drn" }
-      end
-
-      context "two codes" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest #xxx #imin #drn joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"xxx"}, {:text => "drn"}]})] }
-        its(:in?)  { should     be     }
-        its(:out?) { should_not be     }
-        it {         should     be_valid }
-        its(:code) { should ==  "xxx" }
-      end
-
-    end
-
-    context "invalid structure" do
-
-      context "two tokens" do
-
-        context "no code" do
-          let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
-          its(:in?)  { should     be     }
-          its(:out?) { should     be     }
-          it {         should_not be_valid }
-          its(:code) { should     be_nil }
-        end
-
-        context "with code" do
-          let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker #DRN ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}, {:text => "DRN"}]})] }
-          its(:in?)  { should     be     }
-          its(:out?) { should     be     }
-          it {         should_not be_valid }
-          its(:code) { should  == "drn" }
-        end
-
-      end
-
-    end
-  end
-
-  context "#<=>" do
-    let(:default_left_args)  { {:id => 1, :from_user => "xxx", :to_user => "eurucamplivetest"} }
-    let(:default_right_args) { {:id => 2, :from_user => "yyy", :to_user => "eurucamplivetest"} }
-
-    let(:left)         { Twitter::Status.new(*left_args)  }
-    let(:right)        { Twitter::Status.new(*right_args) }
-
+  describe "#<=>" do
     subject { left <=> right }
 
     context "the same tweet" do
@@ -163,6 +81,74 @@ describe Twitter::Status do
         it { should == -1 }
       end
 
+    end
+
+  end
+
+  describe "#eql?" do
+    subject { left.eql?(right) }
+
+    context "same attributes" do
+      let(:left_args)  { [default_left_args.merge(:text => "@eurucamplivetest   #imin   #DRN")]}
+      let(:right_args) { [default_right_args.merge(:from_user => "xxx", :text => "@eurucamplivetest   #imin   #DRN")] }
+      it { should be_true }
+    end
+
+    context "different attributes" do
+      it { should be_false }
+    end
+
+  end
+
+  describe "#hash" do
+    subject { left.hash }
+
+    context "same attributes" do
+      let(:left_args)  { [default_left_args.merge(:text => "@eurucamplivetest   #imin   #DRN")]}
+      let(:right_args) { [default_right_args.merge(:from_user => "xxx", :text => "@eurucamplivetest   #imin   #DRN")] }
+
+      it { should == right.hash }
+    end
+
+    context "different attributes" do
+      it { should_not == right.hash }
+    end
+
+  end
+
+  describe "#valid?" do
+    let(:subject)    { left.valid? }
+
+    context "invalid attributes" do
+      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #imout #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text => "imout"}, {:text=>"DRN"}]})] }
+
+      it { should be_false }
+    end
+
+    context "valid attributes" do
+      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
+
+      it { should be_true }
+    end
+
+  end
+
+  describe "#code" do
+    let(:subject)    { left.code }
+
+    context "no hashtags" do
+      it { should be_nil }
+    end
+
+    context "hashtags contain only action tokens" do
+      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #imout", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
+      it { should be_nil }
+    end
+
+    context "hashtags contain not only action tokens" do
+      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #DRN #OY ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
+
+      it { should == "drn" }
     end
 
   end

@@ -34,7 +34,7 @@ describe FetchStatusesJob do
 
     let(:statuses) {
       [
-          im_in("DRN", t + 1.minutes)
+        im_in("DRN", t + 1.minutes)
       ]
     }
 
@@ -82,15 +82,15 @@ describe FetchStatusesJob do
 
     let(:statuses) {
       [
-          im_out("FTB", t - 10.minutes),
-          im_in("DRN", t + 1.minutes),
-          im_out("DRN", t + 3.minutes),
-          im_out("DRN", t + 5.minutes),
-          im_out("DRN", t),
-          im_in("DRN", t + 4.minutes),
-          im_out("DRN", t + 6.minutes),
-          im_in("DRN", t + 2.minutes),
-          im_in("FTB", t + 10.minutes)
+        im_out("FTB", t - 10.minutes),
+        im_in("DRN", t + 1.minutes),
+        im_out("DRN", t + 3.minutes),
+        im_out("DRN", t + 5.minutes),
+        im_out("DRN", t),
+        im_in("DRN", t + 4.minutes),
+        im_out("DRN", t + 6.minutes),
+        im_in("DRN", t + 2.minutes),
+        im_in("FTB", t + 10.minutes)
       ]
     }
 
