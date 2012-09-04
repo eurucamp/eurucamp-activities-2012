@@ -19,14 +19,20 @@ Twitter::Status.class_eval do
     @codes ||= hashtags_downcased - [Settings.twitter.tokens.im_in.downcase, Settings.twitter.tokens.im_out.downcase]
   end
 
+  def eql?(other)
+    codes == other.codes && from_user == other.from_user && to_user == other.to_user && in? == other.in? && out? == other.out?
+  end
+
+  def hash
+    [codes, from_user, to_user, in?, out?].hash
+  end
+
   alias :old_comparator :<=>
   def <=>(other)
-    # TODO: refactor me
-    if self == other ||
-       (codes == other.codes && from_user == other.from_user && to_user == other.to_user && in? == other.in? && out? == other.out?)
+    if eql?(other)
       0
-    elsif created_at && other.created_at
-      created_at <=> other.created_at
+    elsif attrs[:created_at] && other.attrs[:created_at]
+      attrs[:created_at] <=> other.attrs[:created_at]
     else
       old_comparator(other)
     end

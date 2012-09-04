@@ -6,7 +6,11 @@ class FetchStatusesJob
   def run!
     query = "to:#{Settings.twitter.account} '#{Settings.twitter.tokens.im_in} OR #{Settings.twitter.tokens.im_out}'"
 
-    SortedSet.new(Twitter.search(query, :rpp => 100, :result_type => "recent", :include_entities => true).results).map do |status|
+    results = Twitter.search(query, :rpp => 100, :result_type => "recent", :include_entities => true).
+                      results.
+                      sort { |x,y| y.attrs[:created_at] <=> x.attrs[:created_at] } # newer first
+
+    SortedSet.new(results).map do |status|
       activity = Activity.where(:code => status.code).first
       if activity
         args = {:account => status.from_user}
