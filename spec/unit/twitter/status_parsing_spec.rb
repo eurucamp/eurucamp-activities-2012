@@ -9,50 +9,51 @@ describe "Twitter::Status - parsing" do
 
   context "valid structure" do
 
-    let(:args) { [default_args.merge(:text => "@eurucamplivetest   #iMout   #drN", :entities => {:hashtags => [{:text=>"iMout"}, {:text=>"drN"}]})] }
+    let(:args)   { [merge_args(default_args, text_with_entities("@eurucamplivetest   #iMout   #drN"))] }
 
-    its(:in?)  { should_not be     }
-    its(:out?) { should     be     }
-    its(:code) { should == "drn"   }
+    its(:in?)    { should     be_false  }
+    its(:out?)   { should     be_true   }
+    its(:code)   { should     == "drn"  }
 
     context "'in' message" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest: #imin #DRN  ", :entities => {:hashtags => [{:text => "imin"}, {:text => "DRN"}]})] }
+      let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest: #imin #DRN  "))] }
 
-      its(:in?)  { should     be     }
-      its(:out?) { should_not be     }
-      its(:code) { should == "drn"   }
+      its(:in?)  { should     be_true   }
+      its(:out?) { should     be_false  }
+      its(:code) { should     == "drn"  }
     end
 
     context "'out' message" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
+      let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest   #imout   #DRN"))] }
 
-      its(:in?)  { should_not be     }
-      its(:out?) { should     be     }
-      its(:code) { should == "drn"   }
+      its(:in?)  { should     be_false  }
+      its(:out?) { should     be_true   }
+      its(:code) { should     == "drn"  }
     end
 
     context "other message" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest #nice #T-Shirt Alex!", :entities => {:hashtags => [{:text=>"nice"}, {:text=>"T-Shirt"}]})] }
+      let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest #nice #T-Shirt Alex!"))] }
 
-      its(:in?)  { should_not be       }
-      its(:out?) { should_not be       }
-      it {         should_not be_valid }
-      its(:code) { should  == "nice"   }
+      its(:in?)  { should     be_false  }
+      its(:out?) { should     be_false  }
+      it         { should_not be_valid  }
+      its(:code) { should     == "nice" }
     end
 
     context "wrong order" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest hahha #imin #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
-      its(:in?)  { should     be }
-      its(:out?) { should_not be }
-      its(:code) { should ==  "drn" }
+      let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest hahha #imin #DRN"))] }
+
+      its(:in?)  { should     be_true   }
+      its(:out?) { should     be_false  }
+      its(:code) { should     == "drn"  }
     end
 
     context "two codes" do
-      let(:args) { [default_args.merge(:text => "@eurucamplivetest #xxx #imin #drn joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"xxx"}, {:text => "drn"}]})] }
-      its(:in?)  { should     be     }
-      its(:out?) { should_not be     }
-      it {         should     be_valid }
-      its(:code) { should ==  "xxx" }
+      let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest #xxx #imin #drn joker  "))] }
+      its(:in?)  { should     be_true   }
+      its(:out?) { should     be_false  }
+      it         { should     be_valid  }
+      its(:code) { should     ==  "xxx" }
     end
 
   end
@@ -62,19 +63,19 @@ describe "Twitter::Status - parsing" do
     context "two tokens" do
 
       context "no code" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker  ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
-        its(:in?)  { should     be     }
-        its(:out?) { should     be     }
-        it {         should_not be_valid }
-        its(:code) { should     be_nil }
+        let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest #imin #imout joker  "))] }
+        its(:in?)  { should     be_true  }
+        its(:out?) { should     be_true  }
+        it         { should_not be_valid }
+        its(:code) { should     be_nil   }
       end
 
       context "with code" do
-        let(:args) { [default_args.merge(:text => "@eurucamplivetest #imin #imout joker #DRN ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}, {:text => "DRN"}]})] }
-        its(:in?)  { should     be     }
-        its(:out?) { should     be     }
-        it {         should_not be_valid }
-        its(:code) { should  == "drn" }
+        let(:args) { [merge_args(default_args, text_with_entities("@eurucamplivetest #imin #imout joker #DRN "))] }
+        its(:in?)  { should     be_true  }
+        its(:out?) { should     be_true  }
+        it         { should_not be_valid }
+        its(:code) { should     == "drn" }
       end
 
     end

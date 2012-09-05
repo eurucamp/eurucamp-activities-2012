@@ -2,11 +2,13 @@ require "spec_helper"
 
 describe Twitter::Status do
 
+  let(:default_out_text)   { text_with_entities("@eurucamplivetest   #imout   #DRN")         }
+  let(:default_in_text)    { text_with_entities("@eurucamplivetest   #imin   #DRN")          }
+
   let(:default_left_args)  { {:id => 1, :from_user => "xxx", :to_user => "eurucamplivetest"} }
   let(:default_right_args) { {:id => 2, :from_user => "yyy", :to_user => "eurucamplivetest"} }
   let(:left_args)          { [default_left_args]                                             }
   let(:right_args)         { [default_right_args]                                            }
-
 
   let(:left)               { Twitter::Status.new(*left_args)                                 }
   let(:right)              { Twitter::Status.new(*right_args)                                }
@@ -28,15 +30,15 @@ describe Twitter::Status do
         context "different from_user" do
 
           context "no created_at" do
-            let(:left_args)  { [default_left_args.merge(:text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
-            let(:right_args) { [default_right_args.merge(:text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
+            let(:left_args)  { [merge_args(default_left_args,  default_out_text)] }
+            let(:right_args) { [merge_args(default_right_args, default_out_text)] }
 
-            it { should_not be }
+            it { should be_false }
           end
 
           context "with created_at" do
-            let(:left_args)  { [default_left_args.merge(:created_at => "2012/10/10 12:01", :text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
-            let(:right_args) { [default_right_args.merge(:created_at => "2012/10/10 12:02", :text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
+            let(:left_args)  { [merge_args(default_left_args,  default_out_text, :created_at => "2012/10/10 12:01")] }
+            let(:right_args) { [merge_args(default_right_args, default_out_text, :created_at => "2012/10/10 12:02")] }
 
             it { should == -1 }
           end
@@ -46,15 +48,15 @@ describe Twitter::Status do
         context "different to_user" do
 
           context "no created_at" do
-            let(:left_args)  { [default_left_args.merge(:from_user => "zzz", :to_user => "eurucamplivetest1", :text => "@eurucamplivetest1   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
-            let(:right_args) { [default_right_args.merge(:from_user => "zzz", :to_user => "eurucamplivetest2", :text => "@eurucamplivetest2   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
+            let(:left_args)  { [merge_args(default_left_args , text_with_entities("@eurucamplivetest1   #imout   #DRN"), :from_user => "zzz", :to_user => "eurucamplivetest1")] }
+            let(:right_args) { [merge_args(default_right_args, text_with_entities("@eurucamplivetest2   #imout   #DRN"), :from_user => "zzz", :to_user => "eurucamplivetest2")] }
 
-            it { should_not be }
+            it { should be_false }
           end
 
           context "with created_at" do
-            let(:left_args)  { [default_left_args.merge(:created_at => "2012/10/10 12:02", :text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
-            let(:right_args) { [default_right_args.merge(:created_at => "2012/10/10 12:02", :text => "@eurucamplivetest   #imout   #DRN", :entities => {:hashtags => [{:text=>"imout"}, {:text=>"DRN"}]})] }
+            let(:left_args)  { [merge_args(default_left_args,  default_out_text, :created_at => "2012/10/10 12:02")] }
+            let(:right_args) { [merge_args(default_right_args, default_out_text, :created_at => "2012/10/10 12:02")] }
 
             it { should == 0 }
           end
@@ -64,8 +66,8 @@ describe Twitter::Status do
       end
 
       context "same users" do
-        let(:left_args)  { [default_left_args.merge(:created_at => "2012/10/10 12:02", :text => "@eurucamplivetest   #imout   #DRN")] }
-        let(:right_args) { [default_right_args.merge(:created_at => "2012/10/10 12:04", :from_user => "xxx", :text => "@eurucamplivetest   #imout   #DRN")] }
+        let(:left_args)  { [merge_args(default_left_args,  default_out_text, :created_at => "2012/10/10 12:02")]                      }
+        let(:right_args) { [merge_args(default_right_args, default_out_text, :created_at => "2012/10/10 12:04", :from_user => "xxx")] }
 
         it { should == 0 }
       end
@@ -75,8 +77,8 @@ describe Twitter::Status do
     context "different operations" do
 
       context "same users" do
-        let(:left_args)  { [default_left_args.merge(:created_at => "2012/10/10 12:02",  :text => "@eurucamplivetest   #imin   #DRN")] }
-        let(:right_args) { [default_right_args.merge(:created_at => "2012/10/10 12:04", :text => "@eurucamplivetest   #imout   #DRN")] }
+        let(:left_args)  { [merge_args(default_left_args,  default_in_text,  :created_at => "2012/10/10 12:02")] }
+        let(:right_args) { [merge_args(default_right_args, default_out_text, :created_at => "2012/10/10 12:04")] }
 
         it { should == -1 }
       end
@@ -89,8 +91,9 @@ describe Twitter::Status do
     subject { left.eql?(right) }
 
     context "same attributes" do
-      let(:left_args)  { [default_left_args.merge(:text => "@eurucamplivetest   #imin   #DRN")]}
-      let(:right_args) { [default_right_args.merge(:from_user => "xxx", :text => "@eurucamplivetest   #imin   #DRN")] }
+      let(:left_args)  { [merge_args(default_left_args,  default_in_text)]                      }
+      let(:right_args) { [merge_args(default_right_args, default_in_text, :from_user => "xxx")] }
+
       it { should be_true }
     end
 
@@ -104,8 +107,8 @@ describe Twitter::Status do
     subject { left.hash }
 
     context "same attributes" do
-      let(:left_args)  { [default_left_args.merge(:text => "@eurucamplivetest   #imin   #DRN")]}
-      let(:right_args) { [default_right_args.merge(:from_user => "xxx", :text => "@eurucamplivetest   #imin   #DRN")] }
+      let(:left_args)  { [merge_args(default_left_args,  default_in_text)]                      }
+      let(:right_args) { [merge_args(default_right_args, default_in_text, :from_user => "xxx")] }
 
       it { should == right.hash }
     end
@@ -117,16 +120,16 @@ describe Twitter::Status do
   end
 
   describe "#valid?" do
-    let(:subject)    { left.valid? }
+    let(:subject) { left.valid? }
 
     context "invalid attributes" do
-      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #imout #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text => "imout"}, {:text=>"DRN"}]})] }
+      let(:left_args) { [merge_args(default_left_args, text_with_entities("@eurucamplivetest hahha #imin #imout #DRN"))] }
 
       it { should be_false }
     end
 
     context "valid attributes" do
-      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #DRN", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
+      let(:left_args) { [merge_args(default_left_args, text_with_entities("@eurucamplivetest hahha #imin #DRN"))] }
 
       it { should be_true }
     end
@@ -134,19 +137,20 @@ describe Twitter::Status do
   end
 
   describe "#code" do
-    let(:subject)    { left.code }
+    let(:subject) { left.code }
 
     context "no hashtags" do
       it { should be_nil }
     end
 
     context "hashtags contain only action tokens" do
-      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #imout", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"imout"}]})] }
+      let(:left_args) { [merge_args(default_left_args, text_with_entities("@eurucamplivetest hahha #imin #imout"))] }
+
       it { should be_nil }
     end
 
     context "hashtags contain not only action tokens" do
-      let(:left_args) { [default_left_args.merge(:text => "@eurucamplivetest hahha #imin #DRN #OY ", :entities => {:hashtags => [{:text=>"imin"}, {:text=>"DRN"}]})] }
+      let(:left_args) { [merge_args(default_left_args, text_with_entities("@eurucamplivetest hahha #imin #DRN #OY "))] }
 
       it { should == "drn" }
     end

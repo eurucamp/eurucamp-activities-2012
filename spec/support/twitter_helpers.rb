@@ -105,10 +105,18 @@ def im_in(code = "DRN", created_at = Time.zone.now)
   activity_tweet(
       "@#{Settings.twitter.account} ##{Settings.twitter.tokens.im_in} ##{code}",
       {
-          :user_mentions => [{:screen_name => Settings.twitter.account, :name => Settings.twitter.account, :id => 112233, :id_str => "112233", :indices => [0, Settings.twitter.account.size - 1]}],
-          :urls          => [],
-          :hashtags      => [{:text => "#{Settings.twitter.tokens.im_in}"}, {:text => code} ]
+        :user_mentions => [{:screen_name => Settings.twitter.account, :name => Settings.twitter.account, :id => 112233, :id_str => "112233", :indices => [0, Settings.twitter.account.size - 1]}],
+        :urls          => [],
+        :hashtags      => [{:text => "#{Settings.twitter.tokens.im_in}"}, {:text => code} ]
       },
       created_at
   )
+end
+
+def text_with_entities(text)
+  {:text => text, :entities => { :hashtags => text.scan(/#\w+/).map { |i| {:text => i.tr("#", "")} }}}
+end
+
+def merge_args(*hashes)
+  hashes.inject(&:merge)
 end
