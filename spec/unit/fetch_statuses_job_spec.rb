@@ -5,6 +5,7 @@ require 'spec_helper'
 describe FetchStatusesJob do
 
   subject { FetchStatusesJob.new.run! }
+
   let!(:activity) {
     Activity.create(
       :code => "DRN",
@@ -14,6 +15,7 @@ describe FetchStatusesJob do
       :published => true
     )
   }
+
   let!(:other_activity) {
     Activity.create(
       :code => "FTB",
@@ -24,17 +26,15 @@ describe FetchStatusesJob do
     )
   }
 
-  let(:t) { Time.zone.now }
-
   before do
-    Twitter.stub_chain(:search, :results).and_return statuses
+    Twitter.stub_chain(:search, :results).and_return(statuses)
   end
 
   context "user is not participating in any activity" do
 
     let(:statuses) {
       [
-        im_in("DRN", t + 1.minutes)
+        im_in("DRN", 1.minutes.ago)
       ]
     }
 
@@ -54,15 +54,15 @@ describe FetchStatusesJob do
 
   context "user is participating in some activity" do
 
+    let(:statuses) {
+      [
+        im_out("DRN", 1.minutes.ago),
+      ]
+    }
+
     before do
       activity.participations.create(:account => "yomakov")
     end
-
-    let(:statuses) {
-      [
-        im_out("DRN", t + 1.minutes),
-      ]
-    }
 
     specify do
       expect do
@@ -82,15 +82,15 @@ describe FetchStatusesJob do
 
     let(:statuses) {
       [
-        im_out("FTB", t - 10.minutes),
-        im_in("DRN", t + 1.minutes),
-        im_out("DRN", t + 3.minutes),
-        im_out("DRN", t + 5.minutes),
-        im_out("DRN", t),
-        im_in("DRN", t + 4.minutes),
-        im_out("DRN", t + 6.minutes),
-        im_in("DRN", t + 2.minutes),
-        im_in("FTB", t + 10.minutes)
+        im_out("FTB", 10.minutes.ago),
+        im_in( "DRN",  1.minutes.ago),
+        im_out("DRN",  3.minutes.ago),
+        im_out("DRN",  5.minutes.ago),
+        im_out("DRN",  1.seconds.ago),
+        im_in( "DRN",  4.minutes.ago),
+        im_out("DRN",  6.minutes.ago),
+        im_in( "DRN",  2.minutes.ago),
+        im_in( "FTB",  9.minutes.ago)
       ]
     }
 
