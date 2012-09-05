@@ -19,3 +19,5 @@
 TODO.md
 .DS_Store
 .sass-cache
+
+config/heroku.yml

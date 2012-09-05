@@ -1,19 +1,14 @@
 namespace :utils do
   task :draw, [:needs] => [:environment] do |t,args|
     CONTESTS = {
-        "#CODECLIMATE"    => 3,
-        "#BUBBLE"         => 10,
-        "#CHEMEX"         => 2,
-        "#OREILLY"        => 6
+        "#SOME_CODE"    => 3,
     }
 
     BLACKBOARD_PEOPLE = {
-        "#OREILLY" => %w(chrisberkhout MichaelP codezeilen shime.rb erotte abrirjam nerdbabe UdoJ),
-        "#CHEMEX"  => %w(chrisberkhout norbertc errote),
-        "#BUBBLE"  => %w(BenjaminMichenrv africajam nerdbabe MichaelP africajam nerdbabe MichaelP dimitritievely)
+        "#SOME_CODE" => %w(fake1 fake2),
     }
 
-    PEOPLE_TO_REJECT = %w(eurucamp eurucamplive myabc piotrgega)
+    PEOPLE_TO_REJECT = %w(your-account)
 
     DB_PEOPLE = {}
 

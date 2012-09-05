@@ -1,6 +1,6 @@
 defaults: &defaults
   twitter:
-    account: "Eactivitiestest"
+    account: "your-account-development"
     messages:
       in: "great, see you there!"
       out: "participation removed!"
@@ -13,7 +13,7 @@ development:
 
 test:
   twitter:
-    account: "eurucamplivetest"
+    account: "your-account-test"
     messages:
       in: "great, see you there!"
       out: "participation removed!"
@@ -24,7 +24,7 @@ test:
 production:
   <<: *defaults
   twitter:
-    account: "eurucamplive"
+    account: "your-account"
     messages:
       in: "great, see you there!"
       out: "participation removed!"
