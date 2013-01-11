@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 ruby "1.9.3"
-gem "rails", "3.2.8"
+gem "rails", "3.2.11"
 gem "twitter",       "~> 3.5.0"
 gem "haml",          "~> 3.1.6"
 gem "settingslogic", "~> 2.0.8"
