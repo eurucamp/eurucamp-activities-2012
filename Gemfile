@@ -14,6 +14,7 @@ gem "heroku_san",    "~> 3.0.2"
 gem "rails_admin"
 gem "devise",        "~> 2.1.2"
 gem "frontend-helpers"
+gem "newrelic_rpm"
 
 group :assets do
   gem "sass",         "~> 3.2.0"
@@ -44,5 +45,4 @@ end
 
 group :production do
   gem "puma"
-  gem "newrelic_rpm"
 end
