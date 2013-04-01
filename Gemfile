@@ -1,8 +1,9 @@
 source "https://rubygems.org"
 
 ruby "1.9.3"
+
 gem "rails", "3.2.11"
-gem "twitter",       "~> 3.5.0"
+gem "twitter",       "~> 4.0.0"
 gem "haml",          "~> 3.1.6"
 gem "settingslogic", "~> 2.0.8"
 gem "mongoid",       "~> 3.0.0"
@@ -43,4 +44,5 @@ end
 
 group :production do
   gem "puma"
+  gem "newrelic_rpm"
 end
