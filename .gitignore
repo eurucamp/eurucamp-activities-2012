@@ -21,3 +21,5 @@ TODO.md
 .sass-cache
 
 config/heroku.yml
+
+.env
