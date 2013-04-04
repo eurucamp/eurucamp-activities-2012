@@ -3,5 +3,7 @@ EurucampActivities::Application.routes.draw do
 
   devise_for :users
 
+  post "notifications" => "notifications#create"
+
   root :to => "participations#index"
 end
