@@ -1,5 +1,4 @@
-eurucamp-activities
-===================
+# eurucamp Activities 2012
 
 Configuration
 -------------
